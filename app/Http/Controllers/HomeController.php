@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Categoria;
-
 use Illuminate\Http\Request;
+use App\Noticia;
 
 class HomeController extends Controller
 {
     /**
-     * Show the application dashboard.
+     * Exibe a view home.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $cat = Categoria::with('filhas')->find(5);
-        return $cat;
+        $noticias = Noticia::orderBy('published_at', 'DESC')->get();
+        return view('home', compact('noticias'));
     }
 }

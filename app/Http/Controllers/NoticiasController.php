@@ -7,60 +7,60 @@ use Illuminate\Http\Request;
 class NoticiasController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Chama a view de listagem das notícias
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        //TODO: Do it!
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostra o formulário de criação da notícia
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        //TODO: Do it!
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Recebe a requisição de criação da notícia.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        //TODO: Do it!
     }
 
     /**
-     * Display the specified resource.
+     * Mostra a notícia
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        //TODO: Do it!
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostra o formulário de edição da notícia.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        //TODO: Do it!
     }
 
     /**
-     * Update the specified resource in storage.
+     * Recebe a requisição de edição da notícia
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -68,17 +68,17 @@ class NoticiasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //TODO: Do it!
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remover a notícia (ou despublicar)
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        //TODO: Do it!
     }
 }

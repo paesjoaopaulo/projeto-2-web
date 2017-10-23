@@ -18,11 +18,12 @@ class CreateNoticiasTable extends Migration
             $table->text('titulo');
             $table->text('subtitulo');
             $table->longText('conteudo');
-            $table->integer('categoria_id')->unsigned();
+            $table->text('keywords')->nullable();
+            $table->boolean('publicado')->default(false);
             $table->integer('user_id')->unsigned()->comment('Autor da notícia');
+            $table->timestamp('published_at');
             $table->timestamps();
 
-            $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
