@@ -23,7 +23,8 @@ class Noticia extends Model
      */
     public static function search($string = "")
     {
-        return self::where('keywords', 'like', '%'.$string.'%')
+        return
+            self::where('keywords', 'like', '%'.$string.'%')
             ->orWhere('titulo', 'like', '%'.$string.'%')
             ->orWhere('subtitulo', 'like', '%'.$string.'%')
             ->orWhere('conteudo', 'like', '%'.$string.'%');

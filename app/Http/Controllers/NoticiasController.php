@@ -16,6 +16,10 @@ use Auth;
 
 class NoticiasController extends Controller
 {
+    public function __contruct(){
+        $this->middleware('expulsaVisitante', ['only' => ['create','store']]);
+    }
+
     /**
      * Chama a view de listagem das notícias
      *
@@ -148,9 +152,10 @@ class NoticiasController extends Controller
      * @param $search string
      * @return View
      */
-    protected function search($search = "")
+    protected function search(Request $request)
     {
-        $noticias = Noticia::search($search)->get();
-        return view('noticias.index', compact('noticias'));
+        $noticias = Noticia::search($request->get('q'))->get();
+        return view('noticias.index', compact('noticias'))
+        ->withInput(['pesquisa', $request->get('q')]);
     }
 }

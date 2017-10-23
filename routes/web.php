@@ -1,7 +1,7 @@
 <?php
 
-Route::get('/noticias/q/{search?}', 'NoticiasController@search');
 Route::resource('/noticias', 'NoticiasController');
+Route::get('/noticias/{search?}', 'NoticiasController@search')->name('noticias.search');
 
 Auth::routes();
 

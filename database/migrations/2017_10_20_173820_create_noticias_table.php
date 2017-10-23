@@ -17,7 +17,7 @@ class CreateNoticiasTable extends Migration
             $table->increments('id');
             $table->text('titulo');
             $table->text('subtitulo');
-            $table->longText('conteudo');
+            $table->text('conteudo');
             $table->text('keywords')->nullable();
             $table->boolean('publicado')->default(false);
             $table->integer('user_id')->unsigned()->comment('Autor da notícia');
