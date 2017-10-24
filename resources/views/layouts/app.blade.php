@@ -35,19 +35,12 @@
 			</div>	
 		</div>
 		<div class="ads">
-			<div class="esquerda"> st
-				<div class="porQueOGoogle">Por que o Google</div>
-				<div class="produtos">Produtos</div>
-				<div class="solucoes">Soluções</div>
-				<div class="launcher">Launcher</div>
-				<div class="precos">Preços</div>
-				<div class="clientes">Clientes</div>
-				<div class="documentacao">Documentação</div>
+			<div class="esquerda">
+				<div class="porQueOGoogle"><a href="{{url('/')}}">Home</a></div>
+				<div class="porQueOGoogle"><a href="{{route('noticias.index')}}">Noticias</a></div>
+				<div class="porQueOGoogle"><a href="{{route('noticias.create')}}">Adicionar Noticia</a></div>
 			</div>
 			<div class="direita">
-				<div class="botaoRolagem">
-					<a href="#" Title="botaoRolagem"><img src="{{asset('imagens/mais.png')}}"/></a>
-				</div>
 				<div class="entreEmContato">
 					<a Title="entreEmContato">ENTRE EM CONTATO</a>
 				</div>

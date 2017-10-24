@@ -16,8 +16,8 @@ use Auth;
 
 class NoticiasController extends Controller
 {
-    public function __contruct(){
-        $this->middleware('expulsaVisitante', ['only' => ['create','store']]);
+    public function __construct(){
+        $this->middleware('redirectIfGuest', ['only' => ['create','store']]);
     }
 
     /**
@@ -155,7 +155,6 @@ class NoticiasController extends Controller
     protected function search(Request $request)
     {
         $noticias = Noticia::search($request->get('q'))->get();
-        return view('noticias.index', compact('noticias'))
-        ->withInput(['pesquisa', $request->get('q')]);
+        return view('noticias.index', compact('noticias'))->withInput(['pesquisa', $request->get('q')]);
     }
 }

@@ -10,7 +10,7 @@
                 <hr>
             </li>
         @empty
-            Nenhuma notícia cadastrada.
+            Nenhuma notícia encontrada.
         @endforelse
     </ul>
 @endsection
