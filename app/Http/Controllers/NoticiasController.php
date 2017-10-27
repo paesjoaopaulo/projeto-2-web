@@ -4,20 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Noticia;
 use App\Anexo;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
 use Ramsey\Uuid\Uuid;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 use Validator;
 use Auth;
 
 class NoticiasController extends Controller
 {
-    public function __construct(){
-        $this->middleware('redirectIfGuest', ['only' => ['create','store']]);
+    public function __construct()
+    {
+        /**
+         * O validação de usuário autenticado só será aplicado para as rotas create e store.
+         */
+        $this->middleware('redirectIfGuest', ['only' => ['create', 'store']]);
     }
 
     /**
@@ -92,40 +94,6 @@ class NoticiasController extends Controller
             $anexo = null;
         }
         return view('noticias.show', compact('noticia', 'anexo'));
-    }
-
-    /**
-     * Mostra o formulário de edição da notícia.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //TODO: Do it!
-    }
-
-    /**
-     * Recebe a requisição de edição da notícia
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //TODO: Do it!
-    }
-
-    /**
-     * Remover a notícia (ou despublicar)
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //TODO: Do it!
     }
 
     /**

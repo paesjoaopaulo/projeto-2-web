@@ -11,7 +11,7 @@
                 <label for="titulo" class="col-md-4 control-label">Título</label>
                 <div class="col-md-6">
                     <input id="titulo" type="text" class="form-control" name="titulo" value="{{ old('titulo') }}"
-                           required autofocus>
+                            autofocus>
                     @if ($errors->has('titulo'))
                         <span class="help-block">
                             <strong>{{ $errors->first('titulo') }}</strong>
@@ -24,7 +24,7 @@
                 <label for="subtitulo" class="col-md-4 control-label">Subtítulo</label>
                 <div class="col-md-6">
                     <input id="subtitulo" type="text" class="form-control" name="subtitulo"
-                           value="{{ old('subtitulo') }}" required autofocus>
+                           value="{{ old('subtitulo') }}"  autofocus>
                     @if ($errors->has('subtitulo'))
                         <span class="help-block">
                             <strong>{{ $errors->first('subtitulo') }}</strong>
@@ -36,7 +36,7 @@
             <div class="form-group{{ $errors->has('conteudo') ? ' has-error' : '' }}">
                 <label for="conteudo" class="col-md-4 control-label">Conteúdo</label>
                 <div class="col-md-6">
-                    <textarea id="conteudo" class="form-control" name="conteudo" required
+                    <textarea id="conteudo" class="form-control" name="conteudo" 
                               autofocus>{{ old('conteudo') }}</textarea>
                     @if ($errors->has('conteudo'))
                         <span class="help-block">
@@ -81,7 +81,7 @@
                 <label for="published_at" class="col-md-4 control-label">Data de publicação</label>
                 <div class="col-md-6">
                     <input id="published_at" type="date" name="published_at" class="form-control"
-                           value="{{ old('published_at') }}" required autofocus>
+                           value="{{ old('published_at') }}"  autofocus>
                     @if ($errors->has('published_at'))
                         <span class="help-block">
                             <strong>{{ $errors->first('published_at') }}</strong>

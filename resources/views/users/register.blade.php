@@ -8,14 +8,14 @@
                 <div class="panel-heading">Registrar</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('registrar') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Nome</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -29,7 +29,7 @@
                             <label for="email" class="col-md-4 control-label">Logradouro</label>
 
                             <div class="col-md-6">
-                                <input id="logradouro" type="text" class="form-control" name="logradouro" value="{{ old('logradouro') }}" required>
+                                <input id="logradouro" type="text" class="form-control" name="logradouro" value="{{ old('logradouro') }}" >
 
                                 @if ($errors->has('logradouro'))
                                     <span class="help-block">
@@ -43,7 +43,7 @@
                             <label for="email" class="col-md-4 control-label">Cidade</label>
 
                             <div class="col-md-6">
-                                <input id="cidade" type="text" class="form-control" name="cidade" value="{{ old('cidade') }}" required>
+                                <input id="cidade" type="text" class="form-control" name="cidade" value="{{ old('cidade') }}" >
 
                                 @if ($errors->has('cidade'))
                                     <span class="help-block">
@@ -57,7 +57,7 @@
                             <label for="email" class="col-md-4 control-label">Estado</label>
 
                             <div class="col-md-6">
-                                <input id="estado" type="text" class="form-control" name="estado" value="{{ old('estado') }}" required>
+                                <input id="estado" type="text" class="form-control" name="estado" value="{{ old('estado') }}" >
 
                                 @if ($errors->has('estado'))
                                     <span class="help-block">
@@ -71,7 +71,7 @@
                             <label for="email" class="col-md-4 control-label">E-Mail</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" >
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -85,7 +85,7 @@
                             <label for="password" class="col-md-4 control-label">Senha</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password" >
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -99,7 +99,7 @@
                             <label for="password-confirm" class="col-md-4 control-label">Confirmar Senha</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" >
                             </div>
                         </div>
 
