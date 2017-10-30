@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title')
+    Todas as notícias
+@endsection
 @section('content')
     <ul>
         @forelse($noticias as $noticia)

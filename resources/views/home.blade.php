@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Home
+@endsection
+
 @section('content')
     <h2>Noticias</h2>
     <ul>

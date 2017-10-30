@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{$noticia->titulo}}
+@endsection
+
 @section('content')
     <h1>{{$noticia->titulo}}</h1>
     <h2>{{$noticia->subtitulo}}</h2>

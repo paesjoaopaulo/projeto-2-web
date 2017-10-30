@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Nova Notícia
+@endsection
+
 @section('content')
     <form method="post" action="{{route('noticias.store')}}" enctype="multipart/form-data">
         <fieldset>
