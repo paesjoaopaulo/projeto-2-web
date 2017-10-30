@@ -3,15 +3,19 @@
 @section('content')
     <h2>Noticias</h2>
     <ul>
-        @foreach($noticias as $noticia)
+        @forelse($noticias as $noticia)
             <li>{{$noticia->titulo}}</li>
-        @endforeach
+        @empty
+            Nenhuma notícia encontrada
+        @endforelse
     </ul>
 
     <h2>Autores</h2>
     <ul>
-        @foreach($autores as $autor)
+        @forelse($autores as $autor)
             <li><img height="40px" width="40px" src="{{$autor->image()}}">{{$autor->name}}</li>
-        @endforeach
+        @empty
+            Nenhuma notícia encontrada
+        @endforelse
     </ul>
 @endsection
