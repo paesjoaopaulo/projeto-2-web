@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('logradouro');
             $table->string('cidade');
             $table->string('estado');
+            $table->string('photo')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

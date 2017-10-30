@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'logradouro', 'cidade', 'estado'
+        'name', 'email', 'password', 'logradouro', 'cidade', 'estado', 'photo'
     ];
 
     /**
@@ -26,4 +26,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function noticias()
+    {
+        return $this->hasMany('App\Noticia', 'user_id');
+    }
+
+    public function image()
+    {
+        if (empty($this->photo) || is_null($this->photo)) {
+            return asset("imagens/user_default.png");
+        } else {
+            return asset("storage/uploads/" . $this->photo);
+        }
+    }
 }

@@ -11,5 +11,8 @@
             <img src="{{asset('storage/uploads/'.$anexo->path)}}" width="640" height="480"/>
         @endif
     @endif
+    <p>
+        Por {{$noticia->autor->name}}, {{$noticia->created_at}}
+    </p>
 
 @endsection

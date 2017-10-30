@@ -29,7 +29,7 @@ class NoticiasController extends Controller
      */
     public function index()
     {
-        $noticias = Noticia::all();
+        $noticias = Noticia::published()->get();
         return view('noticias.index', compact('noticias'));
     }
 
@@ -76,7 +76,7 @@ class NoticiasController extends Controller
             $anexo->save();
         }
 
-        return $noticia->with('anexos')->get();
+        return redirect()->route('noticias.show', $noticia);
     }
 
     /**
@@ -122,7 +122,7 @@ class NoticiasController extends Controller
      */
     protected function search(Request $request)
     {
-        $noticias = Noticia::search($request->get('q'))->get();
+        $noticias = Noticia::published()->search($request->get('q'))->get();
         return view('noticias.index', compact('noticias'))->withInput(['pesquisa', $request->get('q')]);
     }
 }

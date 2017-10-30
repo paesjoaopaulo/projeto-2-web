@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
+use Ramsey\Uuid\Uuid;
 use Validator;
 use Hash;
 use Auth;
@@ -19,24 +20,24 @@ class AuthController extends Controller
     {
         return view('users.login');
     }
-    
+
     /**
      * Trata a requisição vinda do formulário em /usuario/login [POST]
      */
     public function doLogin(Request $request)
     {
         $validacao = $this->loginValidator($request->all());
-        
-        if($validacao->fails()){
+
+        if ($validacao->fails()) {
             return redirect()->back()->withErrors($validacao->errors());
         }
-        
+
         $cred = [
             'email' => $request->get('email'),
             'password' => $request->get('password')
         ];
 
-        if(Auth::attempt($cred)){
+        if (Auth::attempt($cred)) {
             //Autenticou, manda ele pra home
             return redirect('/');
         } else {
@@ -48,7 +49,7 @@ class AuthController extends Controller
 
     /**
      * Exibe o formulário de registro /usuario/registro [GET]
-     */    
+     */
     public function register()
     {
         return view('users.register');
@@ -57,13 +58,21 @@ class AuthController extends Controller
 
     /**
      * Trata a requisição vinda do formulário de registro /usuario/registro [POST]
-     */    
+     */
     public function doRegister(Request $request)
     {
         $validacao = $this->registerValidator($request->all());
-        
-        if($validacao->fails()){
-            return redirect()->back()->withErrors($validacao->errors());
+
+        if ($validacao->fails()) {
+            return redirect()->back()->withInput()->withErrors($validacao->errors());
+        }
+
+        $photo = null;
+        if ($request->hasFile('photo')) {
+            $nomeArquivo = Uuid::uuid4();
+            $anexoFile = $request->file('photo');
+            $photo = $nomeArquivo . '-' . $anexoFile->getClientOriginalName();
+            $anexoFile->storeAs('uploads', $photo, 'public');
         }
 
         $registrado = User::create([
@@ -73,13 +82,14 @@ class AuthController extends Controller
             'logradouro' => $request->get('logradouro'),
             'cidade' => $request->get('cidade'),
             'estado' => $request->get('estado'),
+            'photo' => $photo,
         ]);
 
-        if($registrado){
+        if ($registrado) {
             Auth::login($registrado);
             return redirect('/');
         } else {
-            return redirect()->back()->withInput()->withErrors($validacao->errors());            
+            return redirect()->back()->withInput()->withErrors($validacao->errors());
         }
     }
 
@@ -112,6 +122,7 @@ class AuthController extends Controller
             'logradouro' => 'required|string|min:5|max:255',
             'cidade' => 'required|string|min:3|max:255',
             'estado' => 'required|string|size:2',
+            'photo' => 'image:jpg',
         ]);
     }
 

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Noticia;
+use App\User;
 use Auth;
+
 class HomeController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $noticias = Noticia::orderBy('published_at', 'DESC')->get();
-        return view('home', compact('noticias'));
+        $noticias = Noticia::published()->orderBy('published_at', 'DESC')->get();
+        $autores = User::orderBy('name', 'ASC')->get();
+        return view('home', compact('noticias', 'autores'));
     }
 }
