@@ -4,7 +4,7 @@
     <h2>Noticias</h2>
     <ul>
         @forelse($noticias as $noticia)
-            <li>{{$noticia->titulo}}</li>
+            <li><a href="{{route('noticias.show', $noticia)}}">{{$noticia->titulo}}</a></li>
         @empty
             Nenhuma notícia encontrada
         @endforelse

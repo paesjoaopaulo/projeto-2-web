@@ -12,7 +12,7 @@
         @endif
     @endif
     <p>
-        Por {{$noticia->autor->name}}, {{$noticia->published_at->format('d/m/Y H:i')}}
+        Por {{$noticia->autor->name}}, em {{$noticia->published_at->format('d/m/Y')}}
     </p>
 
 @endsection
