@@ -51,6 +51,7 @@ class NoticiasController extends Controller
      */
     public function store(Request $request)
     {
+        dd("kklsdncndskln");
         $validator = $this->validator($request->all());
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator->getMessageBag());

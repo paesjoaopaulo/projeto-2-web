@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <form method="post" action="{{route('noticias.store')}}" enctype="multipart/form-data">
+    <form id="frm_cadastrarNoticia" enctype="multipart/form-data">
         <fieldset>
             <legend>Nova Notícia</legend>
 
@@ -109,7 +109,7 @@
 
             <div class="form-group">
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <button id="btnCadastrarNoticia" type="button" class="btn btn-primary">Cadastrar</button>
                 </div>
             </div>
 
