@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{$noticia->titulo}}
+@endsection
+
 @section('content')
     <h1>{{$noticia->titulo}}</h1>
     <h2>{{$noticia->subtitulo}}</h2>
@@ -12,7 +16,7 @@
         @endif
     @endif
     <p>
-        Por {{$noticia->autor->name}}, {{$noticia->created_at}}
+        Por {{$noticia->autor->name}}, em {{$noticia->published_at->format('d/m/Y')}}
     </p>
 
 @endsection
