@@ -2,10 +2,10 @@ $(document).ready(function () {
     $("#btnCadastrarNoticia").click(function (e) {
         e.preventDefault();
 
-        var form = $('#frm_cadastrarNoticia').find('input, textarea').serialize();
+        var form = document.getElementsByTagName('form')[0];
         console.log(form);
-        var formData = new FormData();
-        formData.append('anexo', $('#anexo').prop('files')[0]);
+        var formData = new FormData(form);
+        formData.append('anexo', 'edkçcm');
 
         console.log(formData);
         //TODO: it
@@ -30,7 +30,11 @@ $(document).ready(function () {
         })
     })
 })
-buscarNoticias();
+
+setInterval(() => {
+    buscarNoticias();
+}, 2000);
+
 function buscarNoticias(){
     $.ajax({
         url: '/noticias',
@@ -39,7 +43,7 @@ function buscarNoticias(){
             $('#ultimasNoticias').find('li').remove();
         },
         success: function (data) {
-            if (data.lenght > 0) {
+            if (data.length > 0) {
                 $.each(data, function(key, value){
                     $("#ultimasNoticias").append('<li>'+value.titulo+'</li>');  
                 })

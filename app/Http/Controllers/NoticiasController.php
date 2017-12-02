@@ -65,6 +65,7 @@ class NoticiasController extends Controller
         $noticia->subtitulo = $request->get('subtitulo');
         $noticia->conteudo = $request->get('conteudo');
         $noticia->keywords = $request->get('keywords');
+        $noticia->id_categoria = 1;
         $noticia->published_at = $request->get('published_at');
         $noticia->publicado = ($request->get('publicado') == 'on') ? true : false;
         $noticia->user_id = Auth::id();

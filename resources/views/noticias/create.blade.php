@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
     <form id="frm_cadastrarNoticia" enctype="multipart/form-data">
         <fieldset>
         <h2>Nova Notícia</h2>
@@ -116,7 +116,7 @@
         </fieldset>
     </form>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <h2>Últimas Notícias</h2>
         <ul id="ultimasNoticias">
             <li index="5">ahahahahahah</li>
