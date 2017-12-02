@@ -9,8 +9,6 @@
         <fieldset>
             <legend>Nova Notícia</legend>
 
-            {{csrf_field()}}
-
             <div class="form-group{{ $errors->has('titulo') ? ' has-error' : '' }}">
                 <label for="titulo" class="col-md-4 control-label">Título</label>
                 <div class="col-md-6">

@@ -30,6 +30,21 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('cep') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">CEP</label>
+
+                            <div class="col-md-6">
+                                <input id="cep" type="text" class="form-control" name="cep" value="{{ old('cep') }}" onchange="buscarEndereco($(this).val())">
+                                <div class="loaderField"></div>
+
+                                @if ($errors->has('cep'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('cep') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('logradouro') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">Logradouro</label>
 
