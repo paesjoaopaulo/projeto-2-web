@@ -5,8 +5,8 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
     <link href="{{asset('css/estilo.css')}}" rel="stylesheet">
-
-    <script src="/js/jquery-2.2.4.js"></script>
+    
+    <script src="{{asset('js/jquery-2.2.4.js')}}"></script>
 
     <title>@yield('title')</title>
 </head>
