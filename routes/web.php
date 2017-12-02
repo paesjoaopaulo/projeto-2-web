@@ -1,6 +1,7 @@
 <?php
 
 Route::get('/noticias/s/{search?}', 'NoticiasController@search')->name('noticias.search');
+Route::get('/noticias/sn/{search?}', 'NoticiasController@searchTitulo')->name('noticias.searchTitulo');
 Route::get('/noticias', 'NoticiasController@index')->name('noticias.index');
 Route::get('/noticias/create', 'NoticiasController@create')->name('noticias.create');
 Route::get('/noticias/{noticia}', 'NoticiasController@show')->name('noticias.show');

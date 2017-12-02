@@ -169,8 +169,13 @@
 	float: left;
 	text-align: center;
 }
+#itensPesquisa{
+	position: absolute;
+	left: 650px;
+	top: 50px;
+	display: none;
 
-
+}
 
 
 

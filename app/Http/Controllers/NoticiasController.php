@@ -19,7 +19,7 @@ class NoticiasController extends Controller
         /**
          * O validação de usuário autenticado só será aplicado para as rotas create e store.
          */
-        $this->middleware('redirectIfGuest', ['only' => ['create', 'store']]);
+        //$this->middleware('redirectIfGuest', ['only' => ['create', 'store']]);
     }
 
     /**
@@ -27,12 +27,9 @@ class NoticiasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $noticias = Noticia::published()->get();
-        if($request->ajax()){
-            return $noticias;
-        }
         return view('noticias.index', compact('noticias'));
     }
 
@@ -126,9 +123,16 @@ class NoticiasController extends Controller
      * @param $search string
      * @return View
      */
-    protected function search(Request $request)
+    public function search(Request $request)
     {
         $noticias = Noticia::published()->search($request->get('q'))->get();
         return view('noticias.index', compact('noticias'))->withInput(['pesquisa', $request->get('q')]);
+    }    
+
+    public function searchTitulo(Request $request, $valor)
+    {
+        $noticias = Noticia::where('titulo', '=',$valor)->get();
+ 
+        return $noticias;
     }
 }

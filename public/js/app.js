@@ -1,4 +1,47 @@
+var array = [
+    {titulo: "sebastiao"},
+    {titulo: "palo"}
+]
+
+
 $(document).ready(function () {
+
+    (function() {
+        var timeout;
+        $('#pesquisaInput').keyup( function() {
+            var elem = $(this);
+            var string = elem.val();
+
+            if (string.length >= 3) {
+                clearTimeout(timeout);
+                timeout = setTimeout(function() {
+                   $.ajax({ // ajax stuff
+                        url: "/noticias/sn/"+string,
+                        method: "get",
+                        success : function(data){ console.log(data) }
+                    });     
+                }, 80); // <-- choose some sensible value here                                      
+            } else if (string.length <= 1) { /*show original content*/ }
+        });
+    }());
+
+    $("#pesquisaInput").on("focus", function(e){
+    $.each(array, function(key, value){
+        $("#itensPesquisa>ul").append("<li><a href='#'>"+value.titulo+"</a></li>");
+        
+    })        
+        $("#itensPesquisa").show();
+    })
+    
+    $("#pesquisaInput").on("focusout", function(e){
+        $("#itensPesquisa").hide();
+        $("#itensPesquisa").find('li').remove();
+    })    
+    
+    $("#pesquisaInput").on("focusout", function(e){
+        $("#itensPesquisa").hide();
+    })
+
     $("#btnCadastrarNoticia").click(function (e) {
         e.preventDefault();
 
