@@ -5,9 +5,11 @@
 @endsection
 
 @section('content')
+<div class="row">
+    <div class="col-md-6">
     <form id="frm_cadastrarNoticia" enctype="multipart/form-data">
         <fieldset>
-            <legend>Nova Notícia</legend>
+        <h2>Nova Notícia</h2>
 
             <div class="form-group{{ $errors->has('titulo') ? ' has-error' : '' }}">
                 <label for="titulo" class="col-md-4 control-label">Título</label>
@@ -113,4 +115,16 @@
 
         </fieldset>
     </form>
+    </div>
+    <div class="col-md-6">
+        <h2>Últimas Notícias</h2>
+        <ul id="ultimasNoticias">
+            <li index="5">ahahahahahah</li>
+            <li index="4">bbbbbbbbbb</li>
+            <li index="3">ccccccccccc</li>
+            <li index="2">ddddddddddddd</li>
+            <li index="1">eeeeeeeeee</li>
+        </ul>
+    </div>
+</div>
 @endsection

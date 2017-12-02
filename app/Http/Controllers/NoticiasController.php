@@ -19,7 +19,7 @@ class NoticiasController extends Controller
         /**
          * O validação de usuário autenticado só será aplicado para as rotas create e store.
          */
-        //$this->middleware('redirectIfGuest', ['only' => ['create', 'store']]);
+        $this->middleware('redirectIfGuest', ['only' => ['create', 'store']]);
     }
 
     /**
@@ -27,9 +27,12 @@ class NoticiasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $noticias = Noticia::published()->get();
+        if($request->ajax()){
+            return $noticias;
+        }
         return view('noticias.index', compact('noticias'));
     }
 
