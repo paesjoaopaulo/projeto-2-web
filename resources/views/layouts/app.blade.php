@@ -19,9 +19,9 @@
             </div>
             <div class="col-md-2">
                 <div class="pesquisa">
-                    <form action="{{route('noticias.search')}}" method="get">
-                        <input type="text" name="q" class="pesquisaInput" size="23" height="50px"
-                               placeholder="Pesquisar" value="{{isset($_GET['q']) ? $_GET['q'] : ''}}">
+                    <form action="{{route('noticias.searchTitulo')}}" method="get">
+                        <input id="pesquisaInput" type="text" name="q" class="pesquisaInput" size="23" height="50px"
+                               placeholder="Pesquisar" value="{{isset($_GET['q']) ? $_GET['q'] : ''}}" autocomplete="off">
                     </form>
                 </div>
             </div>
@@ -52,19 +52,16 @@
                 <div class="porQueOGoogle"><a href="{{route('noticias.index')}}">Noticias</a></div>
                 <div class="porQueOGoogle"><a href="{{route('noticias.create')}}">Adicionar Noticia</a></div>
             </div>
-            <div class="direita">
-                <div class="entreEmContato">
-                    <a Title="entreEmContato">ENTRE EM CONTATO</a>
-                </div>
-                <div class="testeGratis">
-                    <a Title="TesteGratis">TESTAR GRATUITAMENTE</a>
-                </div>
-            </div>
         </div>
     </div>
+
     <div class="container">
         @yield('content')
     </div>
+</div>
+<div id="itensPesquisa">
+    <ul>
+    </ul>
 </div>
 
 <div id="loading" style="display: none"></div>
