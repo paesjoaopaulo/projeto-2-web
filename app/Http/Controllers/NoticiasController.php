@@ -129,10 +129,8 @@ class NoticiasController extends Controller
         return view('noticias.index', compact('noticias'))->withInput(['pesquisa', $request->get('q')]);
     }    
 
-    public function searchTitulo(Request $request, $valor)
+    public function searchTitulo(Request $request)
     {
-        $noticias = Noticia::where('titulo', '=',$valor)->get();
- 
-        return $noticias;
+        return Noticia::where('titulo', 'like', '%'.$request->get('q').'%')->orderBy('titulo')->limit(5)->get();
     }
 }

@@ -1,9 +1,3 @@
-var array = [
-    {titulo: "sebastiao"},
-    {titulo: "palo"}
-]
-
-
 $(document).ready(function () {
 
     (function() {
@@ -13,34 +7,24 @@ $(document).ready(function () {
             var string = elem.val();
 
             if (string.length >= 3) {
+                $("#itensPesquisa").show();
                 clearTimeout(timeout);
                 timeout = setTimeout(function() {
                    $.ajax({ // ajax stuff
-                        url: "/noticias/sn/"+string,
+                        url: "/noticias/sn/?q="+string,
                         method: "get",
-                        success : function(data){ console.log(data) }
+                        success : function(data){
+                            $('#itensPesquisa').find("li").remove();
+                            $.each(data, function(key, obj){
+                                console.log(obj);
+                                $("#itensPesquisa>ul").append("<li><a href='#'>" + obj.titulo + "</a></li>");                                
+                            })
+                        }
                     });     
-                }, 80); // <-- choose some sensible value here                                      
+                }, 300); // <-- choose some sensible value here                                      
             } else if (string.length <= 1) { /*show original content*/ }
         });
     }());
-
-    $("#pesquisaInput").on("focus", function(e){
-    $.each(array, function(key, value){
-        $("#itensPesquisa>ul").append("<li><a href='#'>"+value.titulo+"</a></li>");
-        
-    })        
-        $("#itensPesquisa").show();
-    })
-    
-    $("#pesquisaInput").on("focusout", function(e){
-        $("#itensPesquisa").hide();
-        $("#itensPesquisa").find('li').remove();
-    })    
-    
-    $("#pesquisaInput").on("focusout", function(e){
-        $("#itensPesquisa").hide();
-    })
 
     $("#btnCadastrarNoticia").click(function (e) {
         e.preventDefault();
@@ -76,7 +60,7 @@ $(document).ready(function () {
 
 setInterval(() => {
     buscarNoticias();
-}, 2000);
+}, 10000);
 
 function buscarNoticias(){
     $.ajax({
