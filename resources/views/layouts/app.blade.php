@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <div class="header container">
+    <div class="header">
         <div class="row">
             <div class="col-md-6">
                 <img src="{{asset('imagens/googleCloudPlataform.png')}}"/>
