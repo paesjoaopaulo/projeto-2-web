@@ -17,7 +17,7 @@ $(document).ready(function () {
                             $('#itensPesquisa').find("li").remove();
                             $.each(data, function(key, obj){
                                 console.log(obj);
-                                $("#itensPesquisa>ul").append("<li><a href='#'>" + obj.titulo + "</a></li>");                                
+                                $("#itensPesquisa>ul").append("<li><a href='/noticias/"+obj.id+"'>" + obj.titulo + "</a></li>");                                
                             })
                         }
                     });     
@@ -25,6 +25,12 @@ $(document).ready(function () {
             } else if (string.length <= 1) { /*show original content*/ }
         });
     }());
+
+    $("#pesquisaInput").on("focusout", function(e){
+        setTimeout(() => {
+            $("#itensPesquisa>ul").find("li").remove().hide();            
+        }, 300);
+    })
 
     $("#btnCadastrarNoticia").click(function (e) {
         e.preventDefault();
