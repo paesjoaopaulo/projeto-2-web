@@ -66,3 +66,26 @@ var searchNoticiasCallback = function (data) {
         $(searchResultsSelector + ' > ul').append('<li>Nenhum resultado encontrado</li>');
     }
 }
+
+function buscarEndereco(cep) {
+    var cepLimpo = cep.replace(/[^0-9]/g, '').toString();
+    if (cepLimpo.length === 8) {
+        AjaxRequest(
+            'https://viacep.com.br/ws/' + cepLimpo + '/json/',
+            'get',
+            null,
+            function (data) {
+                $("#erroCep").remove();
+                if (data.erro) {
+                    $("#cep").val("");
+                    $('<div id="erroCep" class="help-block"><strong>CEP inválido</strong></div>').insertAfter("#cep");
+                } else {
+                    $('#logradouro').val(data.logradouro);
+                    $('#cidade').val(data.localidade);
+                    $('#estado').val(data.uf);
+                }
+            },
+            '#loader'
+        );
+    }
+}
