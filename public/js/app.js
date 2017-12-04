@@ -1,38 +1,38 @@
 $(document).ready(function () {
 
-    (function() {
-        var timeout;
-        $('#pesquisaInput').on("keyup, focus", function() {
-            var elem = $(this);
-            var string = elem.val();
+    var timeout;
+    $('#pesquisaInput').on("keyup, focusout", function () {
+        var elem = $(this);
+        var string = elem.val();
 
-            if (string.length >= 3) {
-                $("#itensPesquisa").show();
-                clearTimeout(timeout);
-                timeout = setTimeout(function() {
-                   $.ajax({ // ajax stuff
-                        url: "/noticias/sn/?q="+string,
-                        method: "get",
-                        success : function(data){
-                            $('#itensPesquisa').find("li").remove();
-                            $.each(data, function(key, obj){
-                                console.log(obj);
-                                $("#itensPesquisa>ul").append("<li><a href='/noticias/"+obj.id+"'>" + obj.titulo + "</a></li>");                                
-                            })
-                        }
-                    });     
-                }, 300); // <-- choose some sensible value here                                      
-            } else if (string.length <= 1) { /*show original content*/ }
-        });
-    }());
+        console.error(string)
 
-    $("#pesquisaInput").on("focusout", function(e){
-        setTimeout(() => {
-            $("#itensPesquisa>ul").find("li").remove().hide();            
-        }, 300);
+        if (string.length >= 3) {
+            $("#itensPesquisa").show();
+            clearTimeout(timeout);
+            timeout = setTimeout(function () {
+                $.ajax({
+                    url: "/noticias/sn/?q=" + string,
+                    method: "get",
+                    success: function (data) {
+                        $('#itensPesquisa').find("li").remove();
+                        $.each(data, function (key, obj) {
+                            console.log(obj);
+                            $("#itensPesquisa>ul").append("<li><a href='/noticias/" + obj.id + "'>" + obj.titulo + "</a></li>");
+                        })
+                    }
+                });
+            }, 300);
+        } else if (string.length <= 1) {
+            //$("#itensPesquisa>ul").find("li").remove().hide();
+        }
+    });
+
+    $("#pesquisaInput").on("focusout", function (e) {
+        $("#itensPesquisa>ul").find("li").remove().hide();
     })
 
-    
+
     $("#btnCadastrarNoticia").click(function (e) {
         e.preventDefault();
 
@@ -51,29 +51,26 @@ $(document).ready(function () {
                 dados: formData,
                 outros: form
             },
-            processData: false,
-            contentType: false,
             beforeSend: function () {
                 alert("entrou no loading");
                 $("#loading").show()
             },
             success: function (data) {
-
+                console.log(data)
+                return true;
             }
         }).done(function () {
             alert("saiu do loading");
-            setTimeout(() => {
-                $("#loading").hide();            
-            }, 3000);            
+            $("#loading").hide();
         })
     })
 })
 
-setInterval(() => {
-    buscarNoticias();
-}, 10000);
+setInterval(function () {
+    buscarNoticias()
+}, 1000);
 
-function buscarNoticias(){
+function buscarNoticias() {
     $.ajax({
         url: '/noticias',
         method: 'get',
@@ -81,9 +78,11 @@ function buscarNoticias(){
             $('#ultimasNoticias').find('li').remove();
         },
         success: function (data) {
+            console.log(data)
+            return true;
             if (data.length > 0) {
-                $.each(data, function(key, value){
-                    $("#ultimasNoticias").append('<li>'+value.titulo+'</li>');  
+                $.each(data, function (key, value) {
+                    $("#ultimasNoticias").append('<li>' + value.titulo + '</li>');
                 })
             } else {
                 $("#ultimasNoticias").append("<li>Nenhuma noticia encontrada</li>");
@@ -94,6 +93,7 @@ function buscarNoticias(){
     });
 
 }
+
 function buscarEndereco(cep) {
     var cepLimpo = cep.replace(/[^0-9]/g, '').toString();
     if (cepLimpo.length === 8) {

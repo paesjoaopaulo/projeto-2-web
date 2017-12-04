@@ -15,4 +15,4 @@ Route::post('/registro', 'AuthController@doRegister');
 
 Route::post('/logout', 'AuthController@logout')->name('logout');
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
