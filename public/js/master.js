@@ -30,6 +30,24 @@ $(document).ready(function () {
         }
     })
 
+    $("#btnCadastrarNoticia").click(function () {
+        var data = $(this).parents('form').serializeArray();
+        AjaxRequest(
+            '/noticias',
+            'post',
+            data,
+            function (data) {
+                if (data.error) {
+                    alert("Erro na requisção");
+                    console.log(data)
+                }
+                $("#ultimasNoticias > ul").append('<li>' + data.titulo + '</li>');
+                console.log(data)
+            },
+            "#loader"
+        )
+    });
+
 })
 
 var searchNoticiasCallback = function (data) {

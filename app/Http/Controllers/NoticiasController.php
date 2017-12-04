@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Noticia;
 use App\Anexo;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
+use Mockery\Exception;
 use Ramsey\Uuid\Uuid;
 
 use Illuminate\Http\Request;
@@ -30,7 +32,7 @@ class NoticiasController extends Controller
     public function index(Request $request)
     {
         $noticias = Noticia::published()->get();
-        if($request->ajax()){
+        if ($request->ajax()) {
             return $noticias;
         }
         return view('noticias.index', compact('noticias'));
@@ -43,7 +45,8 @@ class NoticiasController extends Controller
      */
     public function create()
     {
-        return view('noticias.create');
+        $noticias = Noticia::orderBy('id', 'DESC')->limit(5)->get();
+        return view('noticias.create', compact('noticias'));
     }
 
     /**
@@ -54,35 +57,48 @@ class NoticiasController extends Controller
      */
     public function store(Request $request)
     {
-        var_dump($request->all());
-        die;
-        $validator = $this->validator($request->all());
-        if ($validator->fails()) {
-            return redirect()->back()->withInput()->withErrors($validator->getMessageBag());
-        }
-        $noticia = new Noticia();
-        $noticia->titulo = $request->get('titulo');
-        $noticia->subtitulo = $request->get('subtitulo');
-        $noticia->conteudo = $request->get('conteudo');
-        $noticia->keywords = $request->get('keywords');
-        $noticia->id_categoria = 1;
-        $noticia->published_at = $request->get('published_at');
-        $noticia->publicado = ($request->get('publicado') == 'on') ? true : false;
-        $noticia->user_id = Auth::id();
-        $noticia->save();
+        try {
+            $validator = $this->validator($request->all());
 
-        if ($request->hasFile('anexo')) {
-            $nomeArquivo = Uuid::uuid4();
-            $anexoFile = $request->file('anexo');
-            $anexoFile->storeAs('uploads', $nomeArquivo . '-' . $anexoFile->getClientOriginalName(), 'public');
-            $anexo = new Anexo();
-            $anexo->path = $nomeArquivo . '-' . $anexoFile->getClientOriginalName();
-            $anexo->type = $anexoFile->getClientMimeType();
-            $anexo->noticia_id = $noticia->id;
-            $anexo->save();
-        }
+            if ($validator->fails()) {
+                return response([
+                    "error" => true,
+                    "errorMessage" => $validator->getMessageBag()
+                ], Response::HTTP_BAD_REQUEST);
+            }
 
-        return redirect()->route('noticias.show', $noticia);
+            $noticia = new Noticia();
+            $noticia->titulo = $request->get('titulo');
+            $noticia->subtitulo = $request->get('subtitulo');
+            $noticia->conteudo = $request->get('conteudo');
+            $noticia->keywords = $request->get('keywords');
+            $noticia->categoria_id = 1;
+            $noticia->published_at = $request->get('published_at');
+            $noticia->publicado = ($request->get('publicado') == 'on') ? true : false;
+            $noticia->user_id = Auth::id();
+            $noticia->save();
+
+            if ($request->hasFile('anexo')) {
+                $nomeArquivo = Uuid::uuid4();
+                $anexoFile = $request->file('anexo');
+                $anexoFile->storeAs('uploads', $nomeArquivo . '-' . $anexoFile->getClientOriginalName(), 'public');
+                $anexo = new Anexo();
+                $anexo->path = $nomeArquivo . '-' . $anexoFile->getClientOriginalName();
+                $anexo->type = $anexoFile->getClientMimeType();
+                $anexo->noticia_id = $noticia->id;
+                $anexo->save();
+            }
+            return response([
+                "error" => false,
+                "resource" => $noticia
+            ], Response::HTTP_CREATED);
+
+        } catch (\Exception $e) {
+            return response([
+                "erro" => true,
+                "message" => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -130,11 +146,11 @@ class NoticiasController extends Controller
     {
         $noticias = Noticia::published()->search($request->get('q'))->get();
         return view('noticias.index', compact('noticias'))->withInput(['pesquisa', $request->get('q')]);
-    }    
+    }
 
     public function searchTitulo(Request $request)
     {
         sleep(1);
-        return Noticia::where('titulo', 'like', '%'.$request->get('q').'%')->orderBy('titulo')->limit(5)->get();
+        return Noticia::where('titulo', 'like', '%' . $request->get('q') . '%')->orderBy('titulo')->limit(5)->get();
     }
 }

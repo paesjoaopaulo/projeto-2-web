@@ -9,6 +9,7 @@ class Noticia extends Model
 {
     protected $with = ['anexos'];
     protected $dates = ['published_at', 'created_at', 'updated_at'];
+    protected $guarded = [];
 
     public function autor()
     {
