@@ -57,6 +57,7 @@ class NoticiasController extends Controller
      */
     public function store(Request $request)
     {
+        sleep(1);
         try {
             $validator = $this->validator($request->all());
 

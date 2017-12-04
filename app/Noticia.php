@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Collection;
+use App\Scopes\OrdemDecrescenteScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Noticia extends Model
@@ -10,6 +10,13 @@ class Noticia extends Model
     protected $with = ['anexos'];
     protected $dates = ['published_at', 'created_at', 'updated_at'];
     protected $guarded = [];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new OrdemDecrescenteScope());
+    }
 
     public function autor()
     {

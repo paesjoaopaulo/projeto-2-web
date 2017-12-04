@@ -39,19 +39,31 @@ function AjaxRequest(urlParam, methodParam, dataParam, onSuccessCallback, loader
         },
         success: onSuccessCallback,
         statusCode: {
-            400: function () {
-                alert("BAD REQUEST: os parâmetros informados não são válidos");
+            400: function (data) {
+                console.error("BAD REQUEST: os parâmetros informados não são válidos");
+                exibeErros(data.responseJSON.errorMessage)
             },
             201: function () {
-                alert("CREATED: recurso cadastrado com sucesso");
+                console.info("CREATED: recurso cadastrado com sucesso");
             },
             500: function () {
-                alert("INTERNAL SERVER ERROR: erro interno no servidor");
+                console.error("INTERNAL SERVER ERROR: erro interno no servidor");
             },
         },
         complete: function () {
             //Se der erro ou sucesso
             $(loaderSelector).hide()
         }
+    })
+}
+
+function exibeErros(errors) {
+    var campos = Object.keys(errors);
+    $(".erro-encontrado").remove();
+    $('.has-error').removeClass('has-error');
+    $.each(campos, function (key, value) {
+        $("#" + value).parents('.form-group').addClass('has-error');
+
+        $('<span class="help-block erro-encontrado"><strong>' + Object.values(errors)[key] + '</strong></span>').insertAfter("#" + value)
     })
 }

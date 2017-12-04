@@ -1,7 +1,7 @@
 @extends('layouts.master') @section('title') Nova Notícia @endsection @section('content')
     <div class="row" style="position: inherit;">
         <div class="col-md-8" style="position: inherit;">
-            <form id="frm_cadastrarNoticia" enctype="multipart/form-data">
+            <form class="form-horizontal" id="frm_cadastrarNoticia" enctype="multipart/form-data">
                 <fieldset>
                     <h2>Nova Notícia</h2>
 
@@ -9,10 +9,11 @@
                         <label for="titulo" class="col-md-4 control-label">Título</label>
                         <div class="col-md-6">
                             <input id="titulo" type="text" class="form-control" name="titulo"
-                                   value="{{ old('titulo') }}" autofocus> @if ($errors->has('titulo'))
+                                   value="{{ old('titulo') }}" autofocus>
+                            @if ($errors->has('titulo'))
                                 <span class="help-block">
-                            <strong>{{ $errors->first('titulo') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('titulo') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>

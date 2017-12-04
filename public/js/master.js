@@ -40,9 +40,13 @@ $(document).ready(function () {
                 if (data.error) {
                     alert("Erro na requisção");
                     console.log(data)
+                } else {
+                    $("#frm_cadastrarNoticia").get(0).reset();
+                    var date = new Date(data.resource.published_at);
+                    $("#ultimasNoticias > li:last").remove();
+                    $('<li>' + data.resource.titulo + ' - <strong>' + date.getDate() + '/' + date.getMonth() + '/' + date.getYear() + '</strong></li>').insertBefore("#ultimasNoticias > li:first");
+                    console.log(data)
                 }
-                $("#ultimasNoticias > ul").append('<li>' + data.titulo + '</li>');
-                console.log(data)
             },
             "#loader"
         )

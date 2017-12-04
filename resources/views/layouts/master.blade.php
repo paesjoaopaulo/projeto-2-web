@@ -42,15 +42,31 @@
             </div>
             <div class="col-md-2">
                 <div class="dropdown">
-                    <img id="user-photo" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                         aria-expanded="true"
-                         src="https://lh5.googleusercontent.com/-7ZJPKRN9rKc/AAAAAAAAAAI/AAAAAAAAAL8/V3irR3cbTUU/photo.jpg?sz=64"
-                         width="32px"/>
+                    @auth()
+                        <img id="user-photo" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                             aria-expanded="true"
+                             src="/storage/uploads/{{Auth::user()->photo}}"
+                             width="32px"/>
+                    @endauth
+                    @guest()
+                        <img id="user-photo" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                             aria-expanded="true"
+                             src="/imagens/login.png"
+                             width="32px"/>
+                    @endguest
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li>
-                            <a href="#" onclick="$('#formLogout').submit()">Sair</a>
-                        </li>
-                        <form id="formLogout" action="{{route('logout')}}" method="post"></form>
+                        @auth()
+                            <li>
+                                <a href="#" onclick="$('#formLogout').submit()">Sair</a>
+                            </li>
+                            <form id="formLogout" action="{{route('logout')}}" method="post"></form>
+                        @endauth
+                        @guest()
+                            <li>
+                                <a href="{{route('login')}}">Login</a>
+                                <a href="{{route('registrar')}}">Registre-se</a>
+                            </li>
+                        @endguest
                     </ul>
                 </div>
             </div>
