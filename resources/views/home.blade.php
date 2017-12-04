@@ -19,7 +19,7 @@
         @forelse($autores as $autor)
             <li><img height="40px" width="40px" src="{{$autor->image()}}">{{$autor->name}}</li>
         @empty
-            Nenhuma notícia encontrada
+            Nenhum autor encontrado
         @endforelse
     </ul>
 @endsection

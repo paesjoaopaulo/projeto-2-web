@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     (function() {
         var timeout;
-        $('#pesquisaInput').keyup( function() {
+        $('#pesquisaInput').on("keyup, focus", function() {
             var elem = $(this);
             var string = elem.val();
 
@@ -32,6 +32,7 @@ $(document).ready(function () {
         }, 300);
     })
 
+    
     $("#btnCadastrarNoticia").click(function (e) {
         e.preventDefault();
 
@@ -53,13 +54,17 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             beforeSend: function () {
+                alert("entrou no loading");
                 $("#loading").show()
             },
             success: function (data) {
 
             }
         }).done(function () {
-            $("#loading").hide();
+            alert("saiu do loading");
+            setTimeout(() => {
+                $("#loading").hide();            
+            }, 3000);            
         })
     })
 })
