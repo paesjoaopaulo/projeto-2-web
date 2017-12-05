@@ -43,7 +43,9 @@ $(document).ready(function () {
                 } else {
                     $("#frm_cadastrarNoticia").get(0).reset();
                     var date = new Date(data.resource.published_at);
-                    $("#ultimasNoticias > li:last").remove();
+                    
+                    if($("#ultimasNoticias > li").length==5)
+                        $("#ultimasNoticias > li:last").remove();
                     $('<li>' + data.resource.titulo + ' - <strong>' + date.getDate() + '/' + date.getMonth() + '/' + date.getYear() + '</strong></li>').insertBefore("#ultimasNoticias > li:first");
                     console.log(data)
                 }
