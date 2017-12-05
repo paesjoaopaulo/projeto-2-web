@@ -64,6 +64,13 @@ function exibeErros(errors) {
     $.each(campos, function (key, value) {
         $("#" + value).parents('.form-group').addClass('has-error');
 
-        $('<span class="help-block erro-encontrado"><strong>' + Object.values(errors)[key] + '</strong></span>').insertAfter("#" + value)
+        var erros = Object.values(errors)[key];
+        erros = erros.toString().split(',');
+        console.log(erros);
+        var htmlerros = "";
+        $.each(erros, function(key, value){
+            htmlerros+=value+"<br>";
+        })
+        $('<span class="help-block erro-encontrado"><strong>' + htmlerros + '</strong></span>').insertAfter("#" + value)
     })
 }
