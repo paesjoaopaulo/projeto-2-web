@@ -33,3 +33,5 @@ php artisan serve
 ```
 
 Pronto! O sistema estará acessível no endereço informado na saída do comando acima. Provavelmente em http://127.0.0.1:8000
+
+O sistema também se encontra na internet por meio do endereço http://web.crpsomeluz.com.br/
